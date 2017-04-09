@@ -1,15 +1,15 @@
 #!/bin/sh
 user=$1
 repo=$2
-tag=$3
-folder=$4
+folder=$3
 echo user=$user
 echo repo=$repo
-echo tag=$tag
 echo folder=$folder
+if [ -n "$TRAVIS_TAG" ]; then
+  for f in $folder/*; do
+    echo tools/bin/linux/amd64/github-release upload --user $user --repo $repo --tag $TRAVIS_TAG --name $(basename $f) --file $f
+    tools/bin/linux/amd64/github-release upload --user $user --repo $repo --tag $TRAVIS_TAG --name $(basename $f) --file $f
+  done
+fi
 
-for f in $folder/*; do
-    echo tools/bin/linux/amd64/github-release upload --user $user --repo $repo --tag $tag --file $f
-    tools/bin/linux/amd64/github-release upload --user $user --repo $repo --tag $tag --name $(basename $f) --file $f
-done
 
