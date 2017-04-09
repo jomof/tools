@@ -3,5 +3,6 @@ repo=$2
 tag=$3
 name=$4
 file=$5
+if [ $tag == 'none' ]; then exit 0
 echo bin/linux/amd64/github-release upload --user $user --repo $repo --tag $tag --name $name --file $file
 bin/linux/amd64/github-release upload --user $user --repo $repo --tag $tag --name $name --file $file
